@@ -85,7 +85,7 @@ def get_repo_URL(sourceRepo, appName):
         case "ADO":
             tempName = appName.split("/")
             lastSplitIndex = len(tempName) - 1
-            # ADO format is https:<base_url>/<org_name>/<project_name>/_git/<repository_name>
+            # ADO format is https://dev.azure.com/<org_name>/<project_name>/_git/<repository_name>
             tempPath = (
                 tempName[1]
                 + "/"
@@ -95,6 +95,13 @@ def get_repo_URL(sourceRepo, appName):
             )
             tempPath = urllib.parse.quote(tempPath)
             return "https://dev.azure.com/" + tempPath
+        case "GitLab":
+            # GitLab format is https://gitlab.com/<org_name>/<repository_name>
+            tempPath = appName.split("GITLAB/")[1]
+            tempPath = urllib.parse.quote(tempPath)
+            return "https://gitlab.com/" + tempPath
+        case "BitBucket":
+            return
 
 
 def get_veracode_org_name(sourceRepo, orgName):
@@ -103,6 +110,10 @@ def get_veracode_org_name(sourceRepo, orgName):
             return "" + orgName
         case "ADO":
             return "ADO/" + orgName
+        case "GitLab":
+            return "GITLAB/" + orgName
+        case "BitBucket":
+            return "BITBUCKET/" + orgName
 
 
 if __name__ == "__main__":

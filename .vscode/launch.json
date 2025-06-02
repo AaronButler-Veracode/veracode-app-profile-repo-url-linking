@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["-o", "vera-aabutler01", "-s", "ADO"],
+            "args": ["-o", "aabutler-vc-repo", "-s", "GitLab"],
             "justMyCode": false
         }
     ]
