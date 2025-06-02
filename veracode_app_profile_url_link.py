@@ -7,7 +7,7 @@ from veracode_api_py import Applications
 def main():
 
     parser = argparse.ArgumentParser(
-        description="This script lists modules in which static findings were identified."
+        description="This script updates Veracode App profiles parameter \"GIT Repo URL\" when it is blank."
     )
 
     parser.add_argument(
@@ -26,11 +26,20 @@ def main():
         required=True,
     )
 
+    parser.add_argument(
+        "-f",
+        "--force_update",
+        help="Force all matching profiles to update the URL, even if already populated",
+        required=False,
+        action="store_true",
+    )
+
     orgName = ""
 
     args = parser.parse_args()
     orgName = args.organization_name
     sourceRepo = args.source_repo
+    forceUpdate = args.force_update
 
     veracodeOrgName = get_veracode_org_name(sourceRepo, orgName)
     applicationsAPI = Applications()
@@ -47,7 +56,7 @@ def main():
                 repoURL = get_repo_URL(sourceRepo, appName)
                 print(repoURL)
                 git_repo_url = profile["git_repo_url"]
-                if not git_repo_url:
+                if not git_repo_url or forceUpdate:
                     update_profile(applicationsAPI, each_app, profile, appName, repoURL)
 
 

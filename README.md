@@ -34,4 +34,5 @@ Otherwise you will need to set environment variables:
 Arguments supported include:
 
 * --organization_name, -o  (required): Name of the organization name in your source repository.
-* --source_repo, -s  (required): The target source repo you wish to link to. Currently only supports cloud versions of: GitHub, ADO, GitLab, BitBucket
+* --source_repo, -s  (required): The target source repo you wish to link to. Currently only supports cloud versions of: GitHub, ADO, GitLab, BitBucket.
+* --force_update, -f (optional): Default false. Forces the script to update fields that are already populated.
